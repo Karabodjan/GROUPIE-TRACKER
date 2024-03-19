@@ -1,0 +1,226 @@
+:root{
+    --list-padding: 10px;
+    --shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+body {
+    font-family: sans-serif;
+    height: 100vh; /*ça va prendre 100% de l'hauteur de l'ecran */
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #1CB5E0, #000046);
+    background: linear-gradient(to top, #1CB5E0, #000046);
+
+}
+
+ul {
+    list-style: none;
+}
+
+a,
+a:visited,
+a:active{
+    text-decoration: none;
+    color: inherit; /*couler herité, pour enlever le blue et violet*/
+    transition: all 0.2s ease/* suspeito*/
+}
+
+nav {
+    color: white;
+    background-color: #121212;
+    padding: 10px 40px; /*haut-bas et droite-gauche*/
+}
+
+/*.logo {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+}*/
+
+
+nav > ul {
+    display: flex;
+    width: max-content;
+    margin: 0 auto;
+}
+
+nav ul li a {
+    width: 150px ;
+    padding-top: var(--list-padding);
+    padding-bottom: var(--list-padding);
+    text-align: center;
+    display: block;
+}
+
+nav ul li a ion-icon {
+    vertical-align: middle; /* five star!*/
+}
+
+nav ul li a:hover {
+    color: #ff9d00;
+}
+
+a:hover{
+    color: #ff9d00;
+}
+
+nav ul li {
+    position: relative;/* suspeito*/
+}
+
+nav ul li ul {
+    position: absolute;
+    top: calc(100% + var(--list-padding));
+    left: 0;
+    background-color: #1d1d1d;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+nav ul li:hover ul{
+    visibility: visible;
+    opacity: 1;
+    box-shadow: var(--shadow);
+}
+
+nav ul li ul li:not(:last-child){
+    border-bottom: 1px solid #121212;
+}
+
+main {
+    margin: 20vh auto;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 60px;
+}
+
+.album{
+    width:300px ;
+    height:300px ;
+
+}
+
+footer{
+    background-color: #212121;
+    color: #dfdfdf;
+    padding: 30px 100px ;/*entre le contenue et les bordes*/
+}
+
+footer h3{
+    color: white;
+}
+
+.footer-top{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));/*reponsive*/
+    gap: 50px;/*espace entre le colonne*/
+    justify-items: center;
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+}
+
+.footer-col {
+    width: max-content;
+}
+
+.footer-col > * {
+    display: block;
+    width: max-content;/*le lien sera à taille de contenu*/
+}
+
+.footer-col > h3{
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.footer-col a {
+    padding: 5px 0;
+}
+
+.footer-middle{
+    width: 100%;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.footer-middle h3{
+    margin-bottom: 10px;
+}
+
+.footer-middle label{
+    display: block;
+    margin-bottom: 10px;
+    overflow-wrap: break-word;/* si l'espace est trop petit, il passe à l'autre ligne*/
+}
+
+input{
+    padding: 10px;
+    border-radius: 3px;
+}
+
+input [type="submit"] {
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+input [type="submit"]:hover {
+    color: white;
+    background-color: #ff9d00;
+}
+
+.footer-bottom {
+    display: flex;/* les buttom seront les un à cote d'autres*/
+    justify-content: center;
+}
+
+a.social{
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+a.social:hover{
+    background-color: #ff9d00;
+    color: white;
+}
+
+a.social:not(:last-child){
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    .footer-top {
+        justify-items: start ;
+    }
+
+}
+
+@media screen and (max-width: 660px) {
+    footer {
+        padding: 30px;
+    }
+
+    .footer-middle{
+        text-align: left;
+    }
+
+}
