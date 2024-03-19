@@ -1,18 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href ="/static/index.css" rel="stylesheet">
-    <title>Barre de Recherche</title>
+    <title>Page avec colonnes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
 
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            margin-top: 0px;
+        }
+
+        .left-container, .right-container {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            align-items: flex-start;
+
+        }
+        .left-container{
+            text-align: right;
+
+        }
+        .block ul{
+            list-style: none;
+        }
+        .center-container {
+            flex-grow: 1;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Style pour les petits écrans */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-container, .right-container, .center-container {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="search-container">
-    <form action="" method="post" class="form-example">
-        <input  id="input" type="text" class="search-input" placeholder="Entrez votre recherche...">
-        <a id="searchButton" class="search-button" href=/result >Rechercher</a>
-    </form>
+<div class="header">
+    <h1>GROUPIE TRACKER</h1>
+</div>
+
+<div class="container">
+    <div class="left-container">
+        <h2>{{.Name}}</h2>
+        <div class="block">
+            {{range .T2}}
+            <ul>
+                <li>{{.}}</li>
+            </ul>
+            {{end}}
+
+        </div>
+    </div>
+    <div class="center-container">
+        <div class="block">
+            <img src={{.T1}} alt="Image Albulm"/>
+        </div>
+        <p>{{.T4}}</p>
+        <p>{{.T3}}</p>
+    </div>
+    <div class="right-container">
+        <h1>Concerts </h1>
+        <div class="block">
+            {{range $key,$value := .T7}}
+            <h2>{{$key}}</h2>
+            <ul>
+                {{range $value}}
+                <li> caca {{.}}</li>
+                {{end}}
+            </ul>
+            {{end}}
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

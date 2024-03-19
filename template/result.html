@@ -1,35 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page avec des Blocs de Texte</title>
-    <link href ="/static/result.css" rel="stylesheet">
+    <title>Google Maps Example</title>
+    <style>
+        /* Définissez les styles de votre carte ici */
+        #map {
+            height: 400px; /* Hauteur de la carte */
+            width: 100%; /* Largeur de la carte */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="column">
-        <div class="block">
-            <p>{{.T1}}</p>
-        </div>
-        <div class="block">
-            <p>{{.T2}}</p>
-        </div>
-        <div class="block">
-            <p>{{.T3}}</p>
-        </div>
-    </div>
-    <div class="column">
-        <div class="block">
-            <p>Texte du Bloc 4</p>
-        </div>
-        <div class="block">
-            <p>Texte du Bloc 5</p>
-        </div>
-        <div class="block">
-            <p>Texte du Bloc 6</p>
-        </div>
-    </div>
-</div>
+<!-- Div pour afficher la carte -->
+<div id="map"></div>
+
+<script>
+    // Fonction d'initialisation de la carte
+    function initMap() {
+        // Coordonnées du centre de la carte
+        var centerCoords = { lat: 40.7128, lng: -74.0060 }; // New York City
+
+        // Création d'une nouvelle carte Google Maps
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10, // Niveau de zoom initial
+            center: centerCoords // Centre de la carte
+        });
+
+        // Option pour ajouter un marqueur sur la carte
+        var marker = new google.maps.Marker({
+            position: centerCoords,
+            map: map,
+            title: 'New York City' // Titre du marqueur (infobulle)
+        });
+    }
+</script>
+
+<!-- Chargement de l'API Google Maps -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=VOTRE_CLE_API&callback=initMap">
+</script>
 </body>
 </html>
