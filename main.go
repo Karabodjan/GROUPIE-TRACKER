@@ -308,7 +308,7 @@ func Api(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
 
-	tmpl, err := template.ParseFiles("Api.html")
+	tmpl, err := template.ParseFiles("./template/Api.html")
 	if err != nil {
 		http.Error(w, "Erreur de rendu du template", http.StatusInternalServerError)
 		return
