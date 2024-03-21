@@ -3,152 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/index.css">
     <title>Page Internet</title>
-    <style>
-        body {
-            background-color: black;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        h1{
-            text-align:center;
-        }
-
-        .full-width-text {
-            background-color: black;
-            padding: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-
-        .image-section img {
-            max-width: 20%;
-            height: auto;
-            border-radius: 100%;
-            display: inline-block;
-            align-items: flex-start;
-        }
-
-        .image-section p {
-            margin-top: 20px;
-            height:auto;
-            display: inline-block;
-        }
-        .image-section p{
-            display:inline-block;
-            height:auto;
-            align-items: center;
-
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .col {
-            flex: 1 0 25%; /* Pour diviser l'espace en 4 colonnes */
-            padding: 10px;
-            box-sizing: border-box; /* Pour inclure les paddings dans la largeur */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;}
-        .col img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius:100%;
-        }
-        .col img:hover{
-            transform:scale(1.2) ;
-            transition-duration: 1s;
-            box-shadow: white;
-            filter:brightness(2);
-        }
-        .container1 {
-            position: relative;
-            background: linear-gradient(135deg, rgb(179, 208, 253) 0%, rgb(164, 202, 248) 100%);
-            border-radius: 1000px;
-            padding: 10px;
-            display: flex;
-            place-content: center;
-            z-index: 0;
-            max-width: 300px;
-            margin-left: 41%;
-        }
-
-        .search-container {
-            position: relative;
-            width: 100%;
-            border-radius: 50px;
-            background: linear-gradient(135deg, rgb(218, 232, 247) 0%, rgb(214, 229, 247) 100%);
-            padding: 5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-container::after, .search-container::before {
-            content: "";
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            position: absolute;
-        }
-
-        .search-container::before {
-            top: -1px;
-            left: -1px;
-            background: linear-gradient(0deg, rgb(218, 232, 247) 0%, rgb(255, 255, 255) 100%);
-            z-index: -1;
-        }
-
-        .search-container::after {
-            bottom: -1px;
-            right: -1px;
-            background: linear-gradient(0deg, rgb(163, 206, 255) 0%, rgb(211, 232, 255) 100%);
-            box-shadow: rgba(79, 156, 232, 0.7019607843) 3px 3px 5px 0px, rgba(79, 156, 232, 0.7019607843) 5px 5px 20px 0px;
-            z-index: -2;
-        }
-
-        .input {
-            padding: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, rgb(218, 232, 247) 0%, rgb(214, 229, 247) 100%);
-            border: none;
-            color: #9EBCD9;
-            font-size: 20px;
-            border-radius: 50px;
-        }
-
-        .input:focus {
-            outline: none;
-            background: linear-gradient(135deg, rgb(239, 247, 255) 0%, rgb(214, 229, 247) 100%);
-        }
-
-        .search__icon {
-            width: 50px;
-            aspect-ratio: 1;
-            border-left: 2px solid white;
-            border-top: 3px solid transparent;
-            border-bottom: 3px solid transparent;
-            border-radius: 50%;
-            padding-left: 12px;
-            margin-right: 10px;
-        }
-
-        .search__icon:hover {
-            border-left: 3px solid white;
-        }
-
-        .search__icon path {
-            fill: white;
-        }
-
-    </style>
-</head>
+  </head>
 <body>
-<div class="full-width-text">
+<nav>
+    <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">API</a></li>
+        <li>
+            <a href="#">About us <ion-icon name="caret-down"></ion-icon></a>
+            <ul>
+                <li><a href="#">Celso</a></li>
+                <li><a href="#">Adrien</a></li>
+            </ul>
+        </li>
+        <li><a href="https://open.spotify.com/intl-fr?" target="_blank">Spotify</a></li>
+    </ul>
+</nav>
+<main>
+<div class="titulo">
     <h1>GROUPIE-TRACKER</h1>
     <form action="/result" method="get">
         <div class="container1">
@@ -174,10 +48,73 @@
         <a href="/result?id={{.ID}}">
             <img src={{.Image}} alt="eeee"/>
         </a>
-        <p id = "pp">{{.Name}}</p>
+        <div class="info">
+            <h2 id = "pp">{{.Name}}</h2>
+            <h3>Genre</h3>
+            <h3>Last Album</h3>
+        </div>
     </div>
     {{end}}
 </div>
+</main>
+<footer>
+    <div class="footer-top">
+        <div class="footer-col">
+            <h3>A propos</h3>
+            <a href="#">Services</a>
+            <a href="#">Histoire de l'entreprise</a>
+            <a href="#">Nos Clients</a>
+            <a href="#">Carrière</a>
+        </div>
+        <div class="footer-col">
+            <h3>Ressources</h3>
+            <a href="#">Documents</a>
+            <a href="#">Blog</a>
+            <a href="#">Ebooks</a>
+            <a href="#">Webinaires</a>
+        </div>
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <a href="#">Aide & conseils</a>
+            <a href="#">SAV</a>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <h3>Rester à jour</h3>
+        <form>
+            <label for="newletter"
+            >Inscrivez-vous à la newsletter pour recevoir les dernières informations
+            </label>
+            <div>
+                <input
+                        type="email"
+                        name="newletter"
+                        id="newletter"
+                        placeholder="Inscrit-toi le sang!"
+                        required
+                >
+                <input type="submit" value="Inscription">
+            </div>
+        </form>
+    </div>
+    <div class="footer-bottom">
+        <a href="#" class="social"
+        ><ion-icon name="logo-facebook"></ion-icon
+        ></a>
+        <a href="#" class="social"
+        ><ion-icon name="logo-instagram"
+        ></ion-icon>
+        </a>
+    </div>
+</footer>
+<script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
 
 
 </body>
