@@ -212,7 +212,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		Value: input,
 	}
 	if r.Method == "POST" {
-		tmpl, _ := template.ParseFiles("index.html")
+		tmpl, _ := template.ParseFiles("./template/index.html")
 		err := tmpl.Execute(w, data)
 		if err != nil {
 			fmt.Println("nope")
@@ -256,13 +256,10 @@ func Result(w http.ResponseWriter, r *http.Request) {
 		T2:    artist.Members,
 		T3:    artist.FirstAlbum,
 		T4:    artist.Creation,
-		//T8:    data_arr2,
-		//T5: location.Locations,
-		//T6: dates.Dates,
-		T7: relation.DatesLocations,
+		T7:    relation.DatesLocations,
 	}
 
-	tmpl, err := template.ParseFiles("index.html")
+	tmpl, err := template.ParseFiles("./template/index.html")
 	if err != nil {
 		http.Error(w, "Erreur de rendu du template", http.StatusInternalServerError)
 		return
@@ -273,11 +270,13 @@ func Result(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
 func Api(w http.ResponseWriter, r *http.Request) {
 
 	var mappa1 = []string{}
 	var mappa2 = []string{}
 	var mappa3 = []int{}
+
 	for i := 1; i <= 52; i++ {
 		artistChannel := make(chan Artist)
 		go fetchArtist(i, artistChannel)
@@ -286,9 +285,6 @@ func Api(w http.ResponseWriter, r *http.Request) {
 		mappa2 = append(mappa2, artist.Name)
 		mappa3 = append(mappa3, artist.ID)
 	}
-	//artistChannel := make(chan Artist)
-	//Id := FindID("ACDC")
-	//go fetchArtist(Id, artistChannel)
 
 	data_arr := []Data2{}
 	//artist := <-artistChannel
@@ -308,7 +304,7 @@ func Api(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/result", http.StatusSeeOther)
 	}
 
-	tmpl, err := template.ParseFiles("Api.html")
+	tmpl, err := template.ParseFiles("./template/API.html")
 	if err != nil {
 		http.Error(w, "Erreur de rendu du template", http.StatusInternalServerError)
 		return
@@ -337,7 +333,7 @@ func Map(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(string(body))
 	data := Data{}
 
-	tmpl, err := template.ParseFiles("result.html")
+	tmpl, err := template.ParseFiles("./template/result.html")
 	if err != nil {
 		http.Error(w, "Erreur de rendu du template", http.StatusInternalServerError)
 		return
