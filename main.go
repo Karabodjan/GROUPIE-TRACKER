@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 var (
@@ -27,9 +28,11 @@ type Data struct {
 	T7    map[string][]string
 }
 type Data2 struct {
-	Image string
-	Name  string
-	ID    int
+	Image    string
+	Name     string
+	ID       int
+	FirstAlb string
+	Creation int
 }
 type Data1 struct {
 	T5 string
@@ -67,31 +70,6 @@ type Relation struct {
 }
 type APIResponse struct {
 	Data interface{} `json:"data"`
-}
-
-func FindID(name string) int {
-	apiURL_1 := "https://groupietrackers.herokuapp.com/api/artists"
-	id := 0
-	var Re []Artist
-	response, err := http.Get(apiURL_1)
-	if err != nil {
-		fmt.Println("error 1")
-	}
-	defer response.Body.Close()
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		fmt.Println("error 2")
-	}
-	err = json.Unmarshal(body, &Re)
-	if err != nil {
-		fmt.Println("error 3")
-	}
-	for _, Relation := range Re {
-		if Relation.Name == name {
-			id = Relation.ID
-		}
-	}
-	return id
 }
 
 func fetchArtist(Id int, ch chan Artist) {
@@ -222,20 +200,92 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	//http.Redirect(w, r, "/result", http.StatusSeeOther)
 }
 func ValidQuery(input int) bool {
-	fmt.Println(input)
+
 	if input <= 0 || input >= 52 {
 		return false
 	} else {
 		return true
 	}
 }
+func isInContainer(container []string, target string) bool {
+	for _, str := range container {
+		cleanedStr := strings.ReplaceAll(str, "+", " ")
+		if cleanedStr == target {
+			return true
+		}
+	}
+	return false
+}
+func FindID(input string) int {
+	fmt.Println(input)
+	input1, _ := strconv.Atoi(input) // str to int
+	//input2 := strconv.Itoa(input)    // str to int
+	apiURL_1 := "https://groupietrackers.herokuapp.com/api/artists"
+	apiURL_2 := "https://groupietrackers.herokuapp.com/api/location"
+	id := 0
+	var Re []Artist
+	var Ri []Location
+	response, err := http.Get(apiURL_1)
+	if err != nil {
+		fmt.Println("error 1")
+	}
+	defer response.Body.Close()
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		fmt.Println("error 2")
+	}
+	err = json.Unmarshal(body, &Re)
+	if err != nil {
+		fmt.Println("error 3")
+	}
+	response2, err := http.Get(apiURL_2)
+	if err != nil {
+		fmt.Println("error 1")
+	}
+	defer response2.Body.Close()
+	body2, err := ioutil.ReadAll(response2.Body)
+	if err != nil {
+		fmt.Println("error 2")
+	}
+	err = json.Unmarshal(body2, &Ri)
+	if err != nil {
+		fmt.Println("error 3")
+	}
+
+	for _, Relation := range Re {
+		if Relation.Name == input {
+			fmt.Println(input, "rzrzrz")
+			id = Relation.ID
+		} else if Relation.Creation == input1 {
+			id = Relation.ID
+		} else if isInContainer(Relation.Members, input) == true {
+			id = Relation.ID
+		} else if Relation.ID == input1 {
+			id = Relation.ID
+		} else if Relation.FirstAlbum == input {
+			id = Relation.ID
+		} else {
+			for _, Location := range Ri {
+				if isInContainer(Location.Locations, input) == true {
+					id = Location.ID
+				}
+			}
+		}
+	}
+	return id
+}
 
 func Result(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.Atoi(r.URL.Query().Get("id"))
 
-	if ValidQuery(Id) == false {
-		Id = FindID(r.URL.Query().Get("id"))
-	}
+	id := r.URL.Query().Get("id")
+	//id2,_:=strconv.Atoi(id)
+	//Id:=0
+	//if ValidQuery(id2){
+	//	Id = strconv.Itoa(id)
+	//}
+	Id := FindID(id)
+	fmt.Println(id, "gdggd")
+
 	artistChannel := make(chan Artist)
 	locationChannel := make(chan Location)
 	datesChannel := make(chan Dates)
@@ -248,6 +298,7 @@ func Result(w http.ResponseWriter, r *http.Request) {
 
 	artist := <-artistChannel
 	relation := <-relationChannel
+	location := <-locationChannel
 
 	data := Data{
 		Input: "ACDC",
@@ -256,6 +307,7 @@ func Result(w http.ResponseWriter, r *http.Request) {
 		T2:    artist.Members,
 		T3:    artist.FirstAlbum,
 		T4:    artist.Creation,
+		T5:    location.Locations,
 		T7:    relation.DatesLocations,
 	}
 
@@ -272,27 +324,48 @@ func Result(w http.ResponseWriter, r *http.Request) {
 }
 
 func Api(w http.ResponseWriter, r *http.Request) {
+	MinCreation, _ := strconv.Atoi(r.FormValue("MinCreation"))
+	MaxCreation, _ := strconv.Atoi(r.FormValue("MaxCreation"))
+	//AlbulmCreation, _ := strconv.Atoi(r.FormValue("AlbulmCreation"))
+	//MinYear, _ := strconv.Atoi(r.FormValue("MinYear"))
+	//Country := r.FormValue("Country")
 
-	var mappa1 = []string{}
-	var mappa2 = []string{}
-	var mappa3 = []int{}
+	var vec1 = []string{}
+	var vec2 = []string{}
+	var vec3 = []int{}
+	var vec4 = []int{}
+	var vec5 = []string{}
 
 	for i := 1; i <= 52; i++ {
 		artistChannel := make(chan Artist)
 		go fetchArtist(i, artistChannel)
 		artist := <-artistChannel
-		mappa1 = append(mappa1, artist.Image)
-		mappa2 = append(mappa2, artist.Name)
-		mappa3 = append(mappa3, artist.ID)
+		if MinCreation != 0 && MaxCreation != 0 {
+			if artist.Creation < MinCreation || artist.Creation > MaxCreation {
+				vec1 = append(vec1, artist.Image)
+				vec2 = append(vec2, artist.Name)
+				vec3 = append(vec3, artist.ID)
+				vec4 = append(vec4, artist.Creation)
+				vec5 = append(vec5, artist.FirstAlbum)
+			}
+		} else {
+			vec1 = append(vec1, artist.Image)
+			vec2 = append(vec2, artist.Name)
+			vec3 = append(vec3, artist.ID)
+			vec4 = append(vec4, artist.Creation)
+			vec5 = append(vec5, artist.FirstAlbum)
+		}
 	}
 
 	data_arr := []Data2{}
 	//artist := <-artistChannel
-	for i := 0; i < len(mappa1); i++ {
+	for i := 0; i < len(vec1); i++ {
 		data_arr = append(data_arr, Data2{
-			Image: mappa1[i],
-			Name:  mappa2[i],
-			ID:    mappa3[i],
+			Image:    vec1[i],
+			Name:     vec2[i],
+			ID:       vec3[i],
+			FirstAlb: vec5[i],
+			Creation: vec4[i],
 		})
 	}
 	if r.Method == "POST" {
