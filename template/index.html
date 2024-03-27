@@ -3,67 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page avec colonnes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
-            margin-top: 0px;
-        }
-
-        .left-container, .right-container {
-            width: 50%;
-            padding: 20px;
-            box-sizing: border-box;
-            align-items: flex-start;
-
-        }
-        .left-container{
-            text-align: right;
-
-        }
-        .block ul{
-            list-style: none;
-        }
-        .center-container {
-            flex-grow: 1;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Style pour les petits écrans */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .left-container, .right-container, .center-container {
-                width: 100%;
-                margin-top: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/static/result.css">
+    <title>Page avec colonne</title>
 </head>
 <body>
+
 <div class="header">
-    <h1>GROUPIE TRACKER</h1>
+    <a href="http://localhost:8080/"><h1>GROUPIE TRACKER</h1></a>
 </div>
 
 <div class="container">
@@ -100,5 +46,36 @@
     </div>
 
 </div>
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-col">
+            <h3>A propos</h3>
+            <a href="https://trello.com/b/vzMeNoUD/groupietracker" target="_blank">Trello</a>
+        </div>
+        <div class="footer-col">
+            <h3>Ressources</h3>
+            <a href="#">Documents</a>
+        </div>
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <a  href="mailto:adrien.froechly@ynov.com"><ion-icon name="mail"></ion-icon> FROECHLY Adrien</a>
+            <a href="mailto:celso.barros@ynov.com"><ion-icon name="mail"></ion-icon> Barros Celso</a>
+            <ion-icon name="mail-outline"></ion-icon>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <a href="https://github.com/Karabodjan/GROUPIE-TRACKER" target="_blank" class="social"
+        ><ion-icon name="logo-github"></ion-icon></a>
+    </div>
+</footer>
+<script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+        nomodule
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
 </body>
 </html>

@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/index.css">
-    <title>Page Internet</title>
+    <title>Groupie-Tracker</title>
   </head>
 <body>
-<nav >
+<nav>
+    <h1 class= "logo">Groupie <span>Tracker.</span> </h1>
         <ul>
-            <li><a href="#">Accueil</a></li>
+            <li><a href="http://localhost:8080/">Home</a></li>
             <li><a href="#">API</a></li>
             <li>
                 <a href="#">About us <ion-icon name="caret-down"></ion-icon></a>
                 <ul>
-                    <li><a href="#">Celso</a></li>
-                    <li><a href="#">Adrien</a></li>
+                    <li><a href="https://github.com/Karabodjan" target="_blank">Celso</a></li>
+                    <li><a href="https://github.com/AlikakilA" target="_blank">Adrien</a></li>
                 </ul>
             </li>
             <li><a href="https://open.spotify.com/intl-fr?" target="_blank">Spotify</a></li>
@@ -23,18 +24,15 @@
 
 </nav>
 <main>
-<div class="titulo">
-    <h1>GROUPIE-TRACKER</h1>
+    <div class="title">
+        <h1>Groupie-tracker</h1>
+        <h1>Groupie-tracker</h1>
+    </div>
     <form action="/result" method="get">
         <div class="container1">
             <div class="search-container">
-                <input id="input" class="input" type="text" name="id" placeholder="Rechercher">
-                <svg viewBox="0 0 24 24" class="search__icon">
-                    <g>
-                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                        </path>
-                    </g>
-                </svg>
+                <input id="input" class="inputi" type="text" name="id" placeholder="Search...">
+                <div class="search"></div>
             </div>
         </div>
     </form>
@@ -152,50 +150,22 @@
     <div class="footer-top">
         <div class="footer-col">
             <h3>A propos</h3>
-            <a href="#">Services</a>
-            <a href="#">Histoire de l'entreprise</a>
-            <a href="#">Nos Clients</a>
-            <a href="#">Carrière</a>
+            <a href="https://trello.com/b/vzMeNoUD/groupietracker" target="_blank">Trello</a>
         </div>
         <div class="footer-col">
             <h3>Ressources</h3>
             <a href="#">Documents</a>
-            <a href="#">Blog</a>
-            <a href="#">Ebooks</a>
-            <a href="#">Webinaires</a>
         </div>
         <div class="footer-col">
             <h3>Contact</h3>
-            <a href="#">Aide & conseils</a>
-            <a href="#">SAV</a>
+            <a  href="mailto:adrien.froechly@ynov.com"><ion-icon name="mail"></ion-icon> FROECHLY Adrien</a>
+            <a href="mailto:celso.barros@ynov.com"><ion-icon name="mail"></ion-icon> Barros Celso</a>
+            <ion-icon name="mail-outline"></ion-icon>
         </div>
     </div>
-    <div class="footer-middle">
-        <h3>Rester à jour</h3>
-        <form>
-            <label for="newletter"
-            >Inscrivez-vous à la newsletter pour recevoir les dernières informations
-            </label>
-            <div>
-                <input
-                        type="email"
-                        name="newletter"
-                        id="newletter"
-                        placeholder="Inscrit-toi le sang!"
-                        required
-                >
-                <input type="submit" value="Inscription">
-            </div>
-        </form>
-    </div>
     <div class="footer-bottom">
-        <a href="#" class="social"
-        ><ion-icon name="logo-facebook"></ion-icon
-        ></a>
-        <a href="#" class="social"
-        ><ion-icon name="logo-instagram"
-        ></ion-icon>
-        </a>
+        <a href="https://github.com/Karabodjan/GROUPIE-TRACKER" target="_blank" class="social"
+        ><ion-icon name="logo-github"></ion-icon></a>
     </div>
 </footer>
 <script
@@ -206,7 +176,6 @@
         nomodule
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 ></script>
-
 
 </body>
 </html>
